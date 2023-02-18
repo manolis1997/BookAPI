@@ -32,7 +32,7 @@ public class Application {
 
         final BookAPIService bookDBService = BookAPI.getBookDBService();
 
-         System.out.println("Καλώς ήρθες στο Book App");
+         System.out.println("Καλώς ήρθες στο Book App μας");
          Boolean x=true;
 
 
