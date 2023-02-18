@@ -14,11 +14,14 @@ import model.thevolumesdb.VolumeResult;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.DefaultHttpClient;
 import services.BookAPIService;
 
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
@@ -187,6 +190,7 @@ public class Application {
                  case "4":
 
                      System.out.println("Επέλεξες 4, δηλαδή τα BookShelf");
+
                      DefaultHttpClient httpClient = new DefaultHttpClient();
                      try {
 
@@ -216,7 +220,6 @@ public class Application {
                          System.out.println("IO Exception");
                          e.printStackTrace();
                      }
-
                      break;
                  case "5":
                      System.out.println("Επέλεξες 5, δηλαδή τα BookShelveVolume");
