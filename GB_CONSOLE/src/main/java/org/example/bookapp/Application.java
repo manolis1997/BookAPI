@@ -20,6 +20,7 @@ import services.BookAPIService;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Application {
@@ -36,6 +37,7 @@ public class Application {
          Boolean x=true;
 
 
+         //Θα μπαινει συνεχεια στην loopa μας μεχρι να πατησει το 6 και το x απο true να γινει false και να τερματισει το App
          while(x){
              System.out.println("Διάλεξε μια επιλογή πατώντας έναν αριθμό");
              System.out.println("1-> Επέλεξε βιβλίο με βάση κάποιο χαρακτηριστικό");
@@ -51,7 +53,7 @@ public class Application {
              System.out.println("Η επιλογή σου είναι η: " +input);
              switch (input){
                  case "1":
-                     System.out.println("Επέλεξες 1, δηλαδή τις βιβλίο");
+                     System.out.println("Επέλεξες 1, δηλαδή για βιβλίο");
                      System.out.println("Δώσε λατινικό γράμμα για κρητήριο αναζήτησης βιβλίου:");
                      System.out.println("A-> Αναζήτηση βάση τίτλου");
                      System.out.println("B-> Αναζήτηση βάση ηθοποιού");
@@ -60,66 +62,81 @@ public class Application {
                      System.out.println("E-> Αναζήτηση βάση ISBN");
 
                      String input2=sc.nextLine();
-                     case "A":
-                         System.out.println("Επέλεξες Α, δηλαδή τίτλο");
-                         System.out.println("Δώσε τίτλο ταινίας:");
+                     if (Objects.equals(input2, "A")) {
 
-                         try{
-                             final String title = sc.nextLine();
-                             List<BookInfo> results;
-                             results = bookDBService.searchForBooks(title);
-                             System.out.println(results);
-                         }catch (BookAPIException e){
-                             System.out.println("Έδωσες λάθος τιμή");
-                         }
-                         break;
-                     case "B":
-                         System.out.println("Επέλεξες B, δηλαδή ηθοποιό");
-                         System.out.println("Δώσε ηθοποιό ταινίας:");
+                             System.out.println("Επέλεξες Α, δηλαδή τίτλο");
+                             System.out.println("Δώσε τίτλο ταινίας:");
 
-                         try{
-                             final String author = sc.nextLine();
-                             List<BookInfo> results;
-                             results = bookDBService.searchForBooks(author);
-                         }catch (BookAPIException e){
-                             System.out.println("Έδωσες λάθος τιμή");
-                         }
-                         break;
-                     case "C":
-                         System.out.println("Επέλεξες C, δηλαδή εκδότη");
-                         System.out.println("Δώσε εκδότη ταινίας:");
+                             //Σε αυτο το σημειο διαβαζει μια τιμη απο τον χρηστη και δημιουργει ενα αντικειμενο τυπου λιστα του BookInfo, ωπου περναει τα αποτελεσματα που παιρνει απο την μεθοδο searchForBooks
+                             try {
+                                 final String title = sc.nextLine();
+                                 List<BookInfo> results;
+                                 results = bookDBService.searchForBooks(title);
+                                 System.out.println(results);
+                             } catch (BookAPIException e) {
+                                 System.out.println("Έδωσες λάθος τιμή");
+                             }
+                     }
+                     if (Objects.equals(input2, "B")) {
 
-                         try{
-                             final String publisher = sc.nextLine();
-                             List<BookInfo> results;
-                             results = bookDBService.searchForBooks(publisher);
-                         }catch (BookAPIException e){
-                             System.out.println("Έδωσες λάθος τιμή");
-                         }
-                         break;
-                     case "D":
-                         System.out.println("Επέλεξες D, δηλαδή θέμα");
-                         System.out.println("Δώσε θέμα ταινίας:");
+                             System.out.println("Επέλεξες B, δηλαδή ηθοποιό");
+                             System.out.println("Δώσε ηθοποιό ταινίας:");
 
-                         try{
-                             final String publisher = sc.nextLine();
-                             List<BookInfo> results;
-                             results = bookDBService.searchForBooks(publisher);
-                         }catch (BookAPIException e){
-                             System.out.println("Έδωσες λάθος τιμή");
-                         }
-                         break;
-                     case "E":
-                         System.out.println("Επέλεξες E, δηλαδή ISBN");
-                         System.out.println("Δώσε ISBN ταινίας:");
-                         try{
-                             final String publisher = sc.nextLine();
-                             List<BookInfo> results;
-                             results = bookDBService.searchForBooks(publisher);
-                         }catch (BookAPIException e){
-                             System.out.println("Έδωσες λάθος τιμή");
-                         }
-                         break;
+                             try {
+                                 final String author = sc.nextLine();
+                                 List<BookInfo> results = bookDBService.searchForBooks(author);
+                                 System.out.println(results);
+                             } catch (BookAPIException e) {
+                                 System.out.println("Έδωσες λάθος τιμή");
+                             }
+
+                     }
+                     if (Objects.equals(input2, "C")) {
+
+                             System.out.println("Επέλεξες C, δηλαδή εκδότη");
+                             System.out.println("Δώσε εκδότη ταινίας:");
+
+                             try {
+                                 final String publisher = sc.nextLine();
+                                 List<BookInfo> results;
+                                 results = bookDBService.searchForBooks(publisher);
+                                 System.out.println(results);
+                             } catch (BookAPIException e) {
+                                 System.out.println("Έδωσες λάθος τιμή");
+                             }
+
+                     }
+                     if (Objects.equals(input2, "D")) {
+
+                             System.out.println("Επέλεξες D, δηλαδή θέμα");
+                             System.out.println("Δώσε θέμα ταινίας:");
+
+                             try {
+                                 final String publisher = sc.nextLine();
+                                 List<BookInfo> results;
+                                 results = bookDBService.searchForBooks(publisher);
+                                 System.out.println(results);
+                             } catch (BookAPIException e) {
+                                 System.out.println("Έδωσες λάθος τιμή");
+                             }
+
+                     }
+                     if (Objects.equals(input2, "E")) {
+
+                             System.out.println("Επέλεξες E, δηλαδή ISBN");
+                             System.out.println("Δώσε ISBN ταινίας:");
+                             try {
+                                 final String publisher = sc.nextLine();
+                                 List<BookInfo> results;
+                                 results = bookDBService.searchForBooks(publisher);
+                                 System.out.println(results);
+                             } catch (BookAPIException e) {
+                                 System.out.println("Έδωσες λάθος τιμή");
+                             }
+
+                     }
+                     break;
+
 
                  case "2":
                      /*

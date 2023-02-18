@@ -36,7 +36,7 @@ public class BookAPITest {
         final BookAPIService bookSearchService = BookAPI.getBookDBService();
         /*Δημιουργούμε μια λίστα τύπου BookInfo που θα περάσουμε τα αποτελέσματα που έχουμε επιλέξει από το JSON στην BookInfo list για να τα εμφανίσουμε στο επόμενο βήμα
          */
-        final List<BookInfo> results = bookSearchService.searchForBooks("");
+        final List<BookInfo> results = bookSearchService.searchForBooks("Nick");
         Assert.assertFalse(results.isEmpty());
         results.forEach(System.out::println);
     }
