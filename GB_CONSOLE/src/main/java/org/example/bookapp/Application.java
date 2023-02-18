@@ -142,7 +142,7 @@ public class Application {
                      /*
                      Σε αυτη την περιπτωση οπως και στο case 4 το εχω κανει διαφορετικα εχω φερει εδω την κληση και το print των results του API
                      */
-                     System.out.println("Επέλεξες 4, δηλαδή τα BookShelf");
+                     System.out.println("Επέλεξες 2, δηλαδή τα VolumeInfo");
                      DefaultHttpClient httpCl = new DefaultHttpClient();
                      try {
 
