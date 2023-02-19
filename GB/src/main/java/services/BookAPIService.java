@@ -47,7 +47,7 @@ public class BookAPIService {
     /*
     Δημιουργουμε μια μεθοδο τυπου List<BookInfo> πέρνοντας το όρισμα από την JUNIT μεθοδο και θα μας επιστρεψει μια λιστα με τα ορισματα που εχουμε βαλει στην κλαση BookInfo
      */
-    //Search-------------------------------------------------------------------------------------------------------------------------------------------
+    //BookInfo-------------------------------------------------------------------------------------------------------------------------------------------
     public List<BookInfo> searchForBooks(String par) throws BookAPIException {
         //Βαζουμε στην μεταβλητη result που ειναι τυπου BookResult το αποτελεσμα της getAPIData για να το βαλει μετα στην λιστα
         BookResult result = getAPIData(par,API_URL, API_KEY);
@@ -60,7 +60,7 @@ public class BookAPIService {
         return bookInfoList;
 
     }
-    //Search
+    //BookInfo
     private BookResult getAPIData(String par,String API_URL, String API_KEY) throws BookAPIException {
         try {
             //Με την συνάρτηση URIBuilder χτιζουμε το url μας βαζοντας και τις παραμετρους
@@ -101,56 +101,9 @@ public class BookAPIService {
     }
 
 
-
-    //result.getItems().size()
-//Volumes------------------------------------------------------------------------------------------------------------------------------------------------
-//public List<VolInfo> searchForVolumes() throws BookAPIException {
-//    VolumeResult res = getAPIdata(API_URL, API_KEY);
-//    List<VolInfo> volumeInfoList;
-//    volumeInfoList = new ArrayList<>(res.getVolumeInfo().size());
-//    for (int i = 0; i < 5; i++) {
-//        volumeInfoList.add(new VolInfo());
-//    }
-//
-//    return volumeInfoList;
-//
-//}
-//    ///Volumes
-//private VolumeResult getAPIdata(String API_URL, String API_KEY) throws BookAPIException {
-//    try {
-//
-//        final URIBuilder uriBuilder = new URIBuilder();
-//        uriBuilder.setScheme("https").setHost("www.googleapis.com").setPath("/books/v1/volumes/KRzGndH1JZIC").addParameter("api_key", API_KEY);
-//
-//        final URI uri = uriBuilder.build();
-//
-//        final HttpGet getRequest = new HttpGet(uri);
-//        final CloseableHttpClient httpclient = HttpClients.createDefault();
-//
-//        try (CloseableHttpResponse response = httpclient.execute(getRequest)) {
-//            final HttpEntity entity = response.getEntity();
-//            final ObjectMapper mapper = new ObjectMapper();
-//
-//            if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
-//                ErrorResponse errorResponse = mapper.readValue(entity.getContent(), ErrorResponse.class);
-//                if (errorResponse.getStatusMessage() != null)
-//                    throw new BookAPIException("Error occurred on API call: " + errorResponse.getStatusMessage());
-//            }
-//
-//            return mapper.readValue(entity.getContent(), VolumeResult.class);
-//        } catch (IOException e) {
-//            throw new BookAPIException("Error requesting data from the TheVolumeDB API.", e);
-//        }
-//    } catch (URISyntaxException e) {
-//        throw new BookAPIException("Unable to create request URI.", e);
-//    }
-//}
-
-
-
     //Bookshelves---------------------------------------------------------------------------------------------------------------------------------------------------------
 public List<BookshelvesInfo> searchForBookshelves() throws BookAPIException {
-    BookshelveResult result = getAPIData(API_URL, API_KEY);
+    BookshelveResult result = getapiData(API_URL, API_KEY);
     List<BookshelvesInfo> bookshelvesInfoList = new ArrayList<>(result.getItems().size());
     for (model.thebookshelvesdb.Item theItem : result.getItems()) {
         bookshelvesInfoList.add(new BookshelvesInfo(theItem));
@@ -161,8 +114,15 @@ public List<BookshelvesInfo> searchForBookshelves() throws BookAPIException {
 }
 
 //Bookshelves
-private BookshelveResult getAPIData(String API_URL, String API_KEY) throws BookAPIException {
+private BookshelveResult getapiData(String API_URL, String API_KEY) throws BookAPIException {
     try {
+        //String baseurl="https://www.googleapis.com/books/v1/users/";
+        //String s1=userid;
+        //String s2="bookshelves";
+//
+        //String totalurl= baseurl+s1+"/"+s2;
+        //final URI uri = new URI(totalurl);
+
 
         final URIBuilder uriBuilder = new URIBuilder();
         uriBuilder.setScheme("https").setHost("www.googleapis.com").setPath("/books/v1/users/102701940585560677579/bookshelves").addParameter("api_key", API_KEY);

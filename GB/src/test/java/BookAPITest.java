@@ -28,7 +28,7 @@ public class BookAPITest {
     /*Εδώ έχουμε τα unit tests που μας επιτρέπουν να τρέξουμε κάθε μέρος-ερώτημα της εργασίας μας ξεχωριστά δημιουργόντας κάποιες μεθόδους
      */
 
-    //Search
+    //BookInfo
     @Test
     public void testSearchAPI() throws BookAPIException {
         /*Δημιουργούμε μια μεταβλητή τύπου BookAPIService αρχικοποιόντας την με τα αποτελέσματα της getBookDBService δηλαδή τα URL και ΑPI τα οποία εκείνη θα τα περάσει στην BookAPIService
@@ -36,19 +36,11 @@ public class BookAPITest {
         final BookAPIService bookSearchService = BookAPI.getBookDBService();
         /*Δημιουργούμε μια λίστα τύπου BookInfo που θα περάσουμε τα αποτελέσματα που έχουμε επιλέξει από το JSON στην BookInfo list για να τα εμφανίσουμε στο επόμενο βήμα
          */
-        final List<BookInfo> results = bookSearchService.searchForBooks("Nick");
+        final List<BookInfo> results = bookSearchService.searchForBooks("");
         Assert.assertFalse(results.isEmpty());
         results.forEach(System.out::println);
     }
 
-    //Volumes
-//    @Test
-//    public void testVolumeAPI() throws BookAPIException {
-//        final BookAPIService bookVolumeService = bookapi.BookAPI.getBookDBService();
-//        final List<VolInfo> results = bookVolumeService.searchForVolumes();
-//        Assert.assertFalse(results.isEmpty());
-//        results.forEach(System.out::println);
-//    }
 
 
     //Bookshelves

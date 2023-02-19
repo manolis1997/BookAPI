@@ -142,17 +142,26 @@ public class Application {
 
 
                  case "2":
-                     /*
-                     Σε αυτη την περιπτωση οπως και στο case 4 το εχω κανει διαφορετικα εχω φερει εδω την κληση και το print των results του API
-                     */
+                     //Σε αυτη την περιπτωση οπως και στο case 4 το εχω κανει διαφορετικα εχω φερει εδω την κληση και το print των results του API
+
+                     Scanner two = new Scanner(System.in);
+
                      System.out.println("Επέλεξες 2, δηλαδή τα VolumeInfo");
-                     DefaultHttpClient httpCl = new DefaultHttpClient();
+                     System.out.println("Δώσε volumeId");
+                     String in=two.nextLine();
+
+
+                     DefaultHttpClient httpClient = new DefaultHttpClient();
                      try {
+                         String baseurl ="https://www.googleapis.com/books/v1/volumes/";
+                         String s=in;
 
-                         HttpGet getRequest = new HttpGet("https://www.googleapis.com/books/v1/volumes/KRzGndH1JZIC");
-                         getRequest.addHeader("accept","application/json");
+                         String totalurl=baseurl + s;
+                         final URI uri = new URI(totalurl);
 
-                         HttpResponse response = httpCl.execute(getRequest);
+                         final HttpGet getRequest = new HttpGet(uri);
+
+                         HttpResponse response = httpClient.execute(getRequest);
 
                          VolumeResult v=null;
                          ObjectMapper mapper = new ObjectMapper();
@@ -174,11 +183,14 @@ public class Application {
                      catch (IOException e){
                          System.out.println("IO Exception");
                          e.printStackTrace();
+                     } catch (URISyntaxException e) {
+                         throw new RuntimeException(e);
                      }
 
                      break;
                  case "3":
                      System.out.println("Επέλεξες 3, δηλαδή τα BookShelves");
+
                      try{
                          List<BookshelvesInfo> results;
                          results = bookDBService.searchForBookshelves();
@@ -189,15 +201,31 @@ public class Application {
                      break;
                  case "4":
 
+                     Scanner four = new Scanner(System.in);
+
                      System.out.println("Επέλεξες 4, δηλαδή τα BookShelf");
 
-                     DefaultHttpClient httpClient = new DefaultHttpClient();
+                     System.out.println("Δώσε userΙd");
+                     String in1=four.nextLine();
+
+                     System.out.println("Δώσε shelf");
+                     String in2=four.nextLine();
+
+                     DefaultHttpClient httpCl = new DefaultHttpClient();
                      try {
 
-                         HttpGet getRequest = new HttpGet("https://www.googleapis.com/books/v1/users/108364080949372785094/bookshelves/0");
-                         getRequest.addHeader("accept","application/json");
 
-                         HttpResponse response = httpClient.execute(getRequest);
+                         String baseURL="https://www.googleapis.com/books/v1/users/";
+                         String s1=in1;
+                         String s2="bookshelves";
+                         String s3=in2;
+
+                         String totalURL=baseURL + s1 + "/" + s2 + "/" + s3;
+                         final URI uri = new URI(totalURL);
+
+                         final HttpGet getRequest = new HttpGet(uri);
+
+                         HttpResponse response = httpCl.execute(getRequest);
 
                          BookshelfResult b=null;
                          ObjectMapper mapper = new ObjectMapper();
@@ -219,6 +247,8 @@ public class Application {
                      catch (IOException e){
                          System.out.println("IO Exception");
                          e.printStackTrace();
+                     } catch (URISyntaxException e) {
+                         throw new RuntimeException(e);
                      }
                      break;
                  case "5":
